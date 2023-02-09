@@ -1,11 +1,13 @@
 package cardlab;
 
 public class Card {
-    public static String[] RANKS = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
-    public static String[] SUITS = {"S", "H", "D", "C"};
-
     private String rank;
     private String suit;
+
+    public Card(String rank, String suit) {
+        this.rank = rank;
+        this.suit = suit;
+    }
 
     // getter & setter
     public String getRank() {
@@ -13,7 +15,13 @@ public class Card {
     }
 
     public void setRank(String rank) {
-        this.rank = rank;
+        // can only contain legal rank
+        if (Utils.checkRank(rank)) {
+            this.rank = rank;
+        } else {
+            System.out.println("Wrong Rank input!!");
+            System.exit(0);
+        }
     }
 
     public String getSuit() {
@@ -21,10 +29,28 @@ public class Card {
     }
 
     public void setSuit(String suit) {
-        this.suit = suit;
+        if (Utils.checkSuit(suit)) {
+            this.suit = suit;
+        } else {
+            System.out.println("Wrong Suit input!!");
+            System.exit(0);
+        }
     }
      
-    private int combineRank(Card a) {
-        reutrn 0;
+    public int combineRank(Card c) {
+        // convert rank to int
+        int first = Utils.getValue(rank);
+
+        // rork out the rank of the second card
+        int second = 0;
+        String otherRank = c.getRank();
+        second = Utils.getValue(otherRank);
+
+        // combine
+        int result = first + second;
+        if (result == 22) {
+            return 12;
+        }
+        return result;
     }
 }
